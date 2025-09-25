@@ -17,7 +17,9 @@ download_folder = "/Users/work/Downloads"
 
 # downloaded_year = PANEL
 login_page = "https://almastart.unibo.it/primo-explore/dbfulldisplay?docid=39UBO_ALMAE_DS5194399330007041&context=L&vid=39UBO_VU&lang=it_IT&adaptor=Local%20Search%20Engine&tab=jsearch_slot&query=any,contains,orbis&offset=0&databases=any,orbis"
-list_page = "https://orbis-r1.bvdinfo.com/version-20250619-3-0/Orbis/1/Companies/List"
+#list_page = "https://orbis-r1.bvdinfo.com/version-20250619-3-0/Orbis/1/Companies/List"
+
+list_page = "https://orbis-r1.bvdinfo.com/version-20250619-3-0/Orbis/1/Companies/List/Display/f74c9f8a-c5ff-401a-a547-571e7e19c896"
 
 driver = webdriver.Chrome(options=options)
 
@@ -46,7 +48,7 @@ def generate_ranges(start, end, width):
         current += width
     return ranges
 
-ranges = generate_ranges(365001, 9012251, 5000)
+ranges = generate_ranges(1, 9012251, 5000)
 
 # Print the ranges for verification
 print(f"Total ranges to process: {len(ranges)}")
@@ -56,6 +58,7 @@ print(f"Last 5 ranges: {ranges[-5:]}")
 wait = WebDriverWait(driver, 15)
 
 for i, (start_val, end_val) in enumerate(ranges):
+    custom_filename = f"ITA_PANEL_{start_val}_{end_val}"
     print(f"\n🔄 Starting export {i+1}/{len(ranges)} for range: {start_val} to {end_val}")
     time.sleep(15)
 
@@ -74,7 +77,7 @@ for i, (start_val, end_val) in enumerate(ranges):
             EC.presence_of_element_located((By.ID, "component_FileName"))
         )
         filename_input.clear()  # remove default text
-        custom_filename = f"ITA_PANEL_{start_val}_{end_val}"
+        # custom_filename = f"ITA_PANEL_{start_val}_{end_val}"
         filename_input.send_keys(custom_filename)
         print(f"✅ Step 2a: Set filename to {custom_filename}.")
     except Exception as e:

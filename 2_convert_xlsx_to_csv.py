@@ -29,7 +29,7 @@ for file in files:
 
     output_file = os.path.splitext(input_path)[0] + ".csv"
     # output_file_pkl = os.path.splitext(input_path)[0] + ".pkl"
-    output_file_parquet = os.path.splitext(input_path)[0] + ".parquet"
+    # output_file_parquet = os.path.splitext(input_path)[0] + ".parquet"
 
     print(output_file)
     pl_df = convert_xlsx_to_csv(input_path, output_file, write=True)
