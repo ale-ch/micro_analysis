@@ -9,7 +9,8 @@ def convert_xlsx_to_csv(input_file: str, output_file: str, write=False) -> pl.Da
     df = pl.read_excel(input_file, sheet_id=2)
 
     if write:
-        df.write_csv(output_file)
+        df = df.rename({col: col.replace('\n', ' ').replace('\r', '') for col in df.columns})
+        df[:,1:].write_csv(output_file)
 
     return df
 
