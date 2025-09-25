@@ -71,7 +71,7 @@ if __name__ == "__main__":
     # columns_to_transpose = ["r2000", "r2001", "r2002"]
 
     for input_file in files:
-        output_file = os.path.join(directory, f"TS_{os.path.basename(input_file)}")
+        output_file = os.path.join(directory, "panel_data", f"TS_{os.path.basename(input_file)}")
         df = pl.read_csv(input_file)
 
         colnames = df.columns
